@@ -1,0 +1,12 @@
+#answer {
+  border-color: black;
+  border-width: 2px;
+}
+
+button {
+  width: 40px;
+}
+
+tr {
+  display: flex;
+}
