@@ -1,6 +1,9 @@
 #answer {
   border-color: black;
-  border-width: 2px;
+  border-width: thick;
+  height: 30px;
+  width: 160px;
+  border: solid;
 }
 
 button {

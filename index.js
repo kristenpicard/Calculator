@@ -16,90 +16,89 @@ var enter = document.getElementById("enter");
 var divide = document.getElementById("divide");
 var answer = document.getElementById("answer");
 
-let number = '';
-let typed = []
+let number = "";
+let typed = [];
 
-function isNumber(text){
-    if(!isNaN(text)){
-        return true;
-    }
+function isNumber(text) {
+  if (!isNaN(text)) {
+    return true;
+  }
 }
 
-function isOperator(text){
-    if(text == "+" || text == "-" || text == "x" || text == "/"){
-        return true;
-    }
+function isOperator(text) {
+  if (text == "+" || text == "-" || text == "x" || text == "/") {
+    return true;
+  }
 }
 
-function add(a, b){
-    return parseInt(a) + parseInt(b);
+function add(a, b) {
+  return parseInt(a) + parseInt(b);
 }
 
-function sub(a, b){
-    return parseInt(a) - parseInt(b);
+function sub(a, b) {
+  return parseInt(a) - parseInt(b);
 }
 
-function mult(a, b){
-    return parseInt(a) * parseInt(b);
+function mult(a, b) {
+  return parseInt(a) * parseInt(b);
 }
 
-function div(a, b){
-    if(b == 0){
-        return "error"
-    } else 
-    console.log(parseInt(a)/parseInt(b))
-    return parseInt(a)/parseInt(b);
+function div(a, b) {
+  if (b == 0) {
+    return "error";
+  } else console.log(parseInt(a) / parseInt(b));
+  return parseInt(a) / parseInt(b);
 }
 
-function calculate(typedValues){
-    let i = 0;
-    let ans = "";
-    while(i < Object.keys(typedValues).length){
-        if(i == 0){
-            ans = typedValues[0].element;
-        }
-        if(typedValues[i+1].operator == '+'){
-            ans = add(ans, typedValues[i+2].element);
-        }
-        if(typedValues[i+1].operator == '-'){
-            ans = sub(ans, typedValues[i+2].element);
-        }
-        if(typedValues[i+1].operator == 'x'){
-            ans = mult(ans, typedValues[i+2].element);
-        }
-        if(typedValues[i+1].operator == '/'){
-            ans = div(ans, typedValues[i+2].element);
-        }
-        i = i + 3;
+function calculate(typedValues) {
+  let i = 0;
+  let ans = "";
+  while (i < Object.keys(typedValues).length) {
+    if (i == 0) {
+      ans = typedValues[0].element;
     }
-    return ans;
+    if (typedValues[i + 1].operator == "+") {
+      ans = add(ans, typedValues[i + 2].element);
+    }
+    if (typedValues[i + 1].operator == "-") {
+      ans = sub(ans, typedValues[i + 2].element);
+    }
+    if (typedValues[i + 1].operator == "x") {
+      ans = mult(ans, typedValues[i + 2].element);
+    }
+    if (typedValues[i + 1].operator == "/") {
+      ans = div(ans, typedValues[i + 2].element);
+    }
+    i = i + 3;
+  }
+  return ans;
 }
 
-
-function onClick(e){
-    let text = e.target.innerHTML;
-    if(isNumber(text)){
-        number = number + text;
-    }
-    if(isOperator(text)){
-        typed.push({element:number});
-        typed.push({operator:text});
-        number = '';
-    }
-    if(text == "C"){
-        typed = [];
-        a = "";
-        number = "";
-        answer.innerHTML = "";
-    }
-    if(text == "E"){
-        typed.push({element:number})
-        let b = calculate(typed);
-        typed = [];
-        typed.push({element:b});
-        answer.innerHTML = b;
-    }
-
+function onClick(e) {
+  let text = e.target.innerHTML;
+  if (isNumber(text)) {
+    number = number + text;
+    answer.innerHTML = number;
+  }
+  if (isOperator(text)) {
+    typed.push({ element: number });
+    typed.push({ operator: text });
+    number = "";
+    answer.innerHTML = text;
+  }
+  if (text == "C") {
+    typed = [];
+    a = "";
+    number = "";
+    answer.innerHTML = "";
+  }
+  if (text == "E") {
+    typed.push({ element: number });
+    let b = calculate(typed);
+    typed = [];
+    typed.push({ element: b });
+    answer.innerHTML = b;
+  }
 }
 
 one.addEventListener("click", onClick);
@@ -118,4 +117,3 @@ zero.addEventListener("click", onClick);
 clear.addEventListener("click", onClick);
 enter.addEventListener("click", onClick);
 divide.addEventListener("click", onClick);
-
